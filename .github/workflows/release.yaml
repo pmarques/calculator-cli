@@ -39,14 +39,14 @@ jobs:
         run: |
           go build -o calculator
 
-      - name: Upload binary
-        env:
-          GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
-        run: gh release upload "${{ github.ref_name }}" "calculator"
-
       - name: Generate SBOM
         uses: CycloneDX/gh-gomod-generate-sbom@v2
         with:
           version: v1
           args: mod -licenses -json -output ${{ env.SBOM_PATH }}
+
+      - name: Upload binary
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh release upload "${{ github.ref_name }}" "calculator"

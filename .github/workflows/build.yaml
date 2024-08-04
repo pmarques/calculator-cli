@@ -1,0 +1,45 @@
+name: Release
+
+on:
+  push:
+    tags:
+    - v*
+
+env:
+  # Golang version to use across CI steps
+  GOLANG_VERSION: '1.22'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  # Needs write for the release
+  contents: write
+
+jobs:
+  build-go:
+    name: Build Go
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@8410ad0602e1e429cee44a835ae9f77f654a6694 # v4.0.0
+
+      - name: Setup Golang
+        uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32 # v5.0.2
+        with:
+          go-version: ${{ env.GOLANG_VERSION }}
+
+      - name: Download all Go modules
+        run: |
+          go mod download
+
+      - name: Build
+        run: |
+          go build -o calculator
+
+      - name: Upload binary
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh release upload "${{ github.ref_name }}" "calculator"

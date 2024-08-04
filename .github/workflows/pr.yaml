@@ -38,4 +38,4 @@ jobs:
         run: |
           go build
           # Since tests are outside the scope, lets just try a quick run
-          ./calculator -h
+          ./calculator-cli -h

@@ -49,7 +49,7 @@ jobs:
           args: mod -licenses -json -output ${{ env.SBOM_PATH }}
 
       - name: Attest Build Provenance
-        uses: actions/attest-build-provenance@897ed5eab6ed058a474202017ada7f40bfa52940 # v1.0.0
+        uses: actions/attest-build-provenance@210c1913531870065f03ce1f9440dd87bc0938cd # v1.4.0
         with:
           subject-path: "calculator"
           sbom-path: ${{ env.SBOM_PATH }}

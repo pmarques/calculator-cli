@@ -45,7 +45,7 @@ jobs:
           go build -o calculator
 
       - name: Generate SBOM
-        uses: CycloneDX/gh-gomod-generate-sbom@v2
+        uses: CycloneDX/gh-gomod-generate-sbom@efc74245d6802c8cefd925620515442756c70d8f # v2.0.0
         with:
           version: v1
           args: mod -licenses -json -output ${{ env.SBOM_PATH }}

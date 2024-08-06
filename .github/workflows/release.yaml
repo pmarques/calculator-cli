@@ -16,7 +16,7 @@ concurrency:
 
 permissions:
   # Needs write for the release
-  contents: write
+  contents: read-all
   # Attestation
   id-token: write
   attestations: write
@@ -25,6 +25,8 @@ jobs:
   build-go:
     name: Build Go
     runs-on: ubuntu-22.04
+    permissions:
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@8410ad0602e1e429cee44a835ae9f77f654a6694 # v4.0.0

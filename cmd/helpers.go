@@ -9,5 +9,6 @@ func StringToInt(s string) int {
 	if err != nil {
 		panic(err)
 	}
+
 	return i
 }

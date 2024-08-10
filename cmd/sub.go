@@ -16,11 +16,13 @@ func init() {
 	rootCmd.AddCommand(subCmd)
 }
 
-func sub(cmd *cobra.Command, args []string) {
+func sub(_ *cobra.Command, args []string) {
 	sub := StringToInt(args[0])
+
 	for _, arg := range args[1:] {
 		num := StringToInt(arg)
 		sub -= num
 	}
+
 	fmt.Println(sub)
 }

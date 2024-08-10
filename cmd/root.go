@@ -6,12 +6,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var (
-	// Used for (Cobra) flags
-	Debug bool
-)
+// Used for (Cobra) flags.
+var Debug bool
 
-// rootCmd represents the base command when called without any subcommands
+// rootCmd represents the base command when called without any subcommands.
 var rootCmd = &cobra.Command{
 	Use:   "calculator",
 	Short: "Calculator is a simple CLI calculator as a cobra example",

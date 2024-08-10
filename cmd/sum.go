@@ -16,11 +16,13 @@ func init() {
 	rootCmd.AddCommand(sumCmd)
 }
 
-func sum(cmd *cobra.Command, args []string) {
+func sum(_ *cobra.Command, args []string) {
 	sub := StringToInt(args[0])
+
 	for _, arg := range args[1:] {
 		num := StringToInt(arg)
 		sub += num
 	}
+
 	fmt.Println(sub)
 }

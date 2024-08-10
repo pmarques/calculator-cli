@@ -1,0 +1,12 @@
+linters:
+  enable-all: true
+  disable:
+  - cyclop
+  - depguard
+  - exhaustruct
+  - forbidigo
+  - funlen
+  - gochecknoglobals
+  # Used by cobra
+  - gochecknoinits
+  - nlreturn

@@ -26,6 +26,14 @@ jobs:
       # Attestation
       id-token: write
       attestations: write
+    strategy:
+      matrix:
+        os: [darwin, linux]
+        arch: [amd64, arm64]
+    env:
+      GOARCH: ${{ matrix.arch }}
+      GOOS: ${{ matrix.os }}
+      BINARY: "ts-${{ matrix.os }}-${{ matrix.arch }}"
     steps:
       - name: Checkout code
         uses: actions/checkout@8410ad0602e1e429cee44a835ae9f77f654a6694 # v4.0.0
@@ -41,7 +49,7 @@ jobs:
 
       - name: Build
         run: |
-          go build -o calculator
+          go build -o "${{ env.BINARY }}"
 
       - name: Generate SBOM
         uses: CycloneDX/gh-gomod-generate-sbom@efc74245d6802c8cefd925620515442756c70d8f # v2.0.0
@@ -52,11 +60,11 @@ jobs:
       - name: Attest Build Provenance
         uses: actions/attest-build-provenance@210c1913531870065f03ce1f9440dd87bc0938cd # v1.4.0
         with:
-          subject-path: "calculator"
+          subject-path: ${{ env.BINARY }}
           sbom-path: ${{ env.SBOM_PATH }}
 
       - name: Upload binary
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
-        run: gh release upload "${{ github.ref_name }}" "calculator"
+        run: gh release upload "${{ github.ref_name }}" "${{ env.BINARY }}"

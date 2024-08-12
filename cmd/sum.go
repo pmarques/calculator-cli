@@ -21,6 +21,11 @@ func sum(_ *cobra.Command, args []string) {
 
 	for _, arg := range args[1:] {
 		num := StringToInt(arg)
+
+		if Debug {
+			fmt.Printf("Add %d to %d\n", num, sub)
+		}
+
 		sub += num
 	}
 

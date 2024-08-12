@@ -21,6 +21,11 @@ func sub(_ *cobra.Command, args []string) {
 
 	for _, arg := range args[1:] {
 		num := StringToInt(arg)
+
+		if Debug {
+			fmt.Printf("Sub %d from %d\n", num, sub)
+		}
+
 		sub -= num
 	}
 

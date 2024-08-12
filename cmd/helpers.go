@@ -12,3 +12,14 @@ func StringToInt(s string) int {
 
 	return i
 }
+
+func StringListToIntList(listStrings []string) []int {
+	n := len(listStrings)
+	numbers := make([]int, n)
+
+	for i, s := range listStrings {
+		numbers[i] = StringToInt(s)
+	}
+
+	return numbers
+}

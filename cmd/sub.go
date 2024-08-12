@@ -6,28 +6,34 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var subCmd = &cobra.Command{
-	Use:   "sub",
-	Short: "Subtract all numbers",
-	Run:   sub,
-}
+func sub(numbers []int, debug bool) int {
+	result := numbers[0]
 
-func init() {
-	rootCmd.AddCommand(subCmd)
-}
-
-func sub(_ *cobra.Command, args []string) {
-	sub := StringToInt(args[0])
-
-	for _, arg := range args[1:] {
-		num := StringToInt(arg)
-
-		if Debug {
-			fmt.Printf("Sub %d from %d\n", num, sub)
+	for _, num := range numbers[1:] {
+		if debug {
+			fmt.Printf("Sub %d from %d\n", num, result)
 		}
 
-		sub -= num
+		result -= num
 	}
 
-	fmt.Println(sub)
+	return result
+}
+
+func newSubCmd() *cobra.Command {
+	subCmd := &cobra.Command{
+		Use:   "sub",
+		Short: "Subtract all numbers",
+		Run: func(cmd *cobra.Command, args []string) {
+			debug, _ := cmd.Root().Flags().GetBool("debug")
+
+			numbers := StringListToIntList(args)
+
+			result := sub(numbers, debug)
+
+			fmt.Println(result)
+		},
+	}
+
+	return subCmd
 }

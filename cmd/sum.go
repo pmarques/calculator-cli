@@ -6,23 +6,34 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var sumCmd = &cobra.Command{
-	Use:   "sum",
-	Short: "Sum all numbers",
-	Run:   sum,
-}
+func sum(numbers []int, debug bool) int {
+	result := numbers[0]
 
-func init() {
-	rootCmd.AddCommand(sumCmd)
-}
+	for _, num := range numbers[1:] {
+		if debug {
+			fmt.Printf("Add %d to %d\n", num, result)
+		}
 
-func sum(_ *cobra.Command, args []string) {
-	sub := StringToInt(args[0])
-
-	for _, arg := range args[1:] {
-		num := StringToInt(arg)
-		sub += num
+		result += num
 	}
 
-	fmt.Println(sub)
+	return result
+}
+
+func newSumCmd(rootCmd *cobra.Command) {
+	sumCmd := &cobra.Command{
+		Use:   "sum",
+		Short: "Sum all numbers",
+		Run: func(_ *cobra.Command, args []string) {
+			debug, _ := rootCmd.Root().Flags().GetBool("debug")
+
+			numbers := StringListToIntList(args)
+
+			result := sum(numbers, debug)
+
+			fmt.Println(result)
+		},
+	}
+
+	rootCmd.AddCommand(sumCmd)
 }

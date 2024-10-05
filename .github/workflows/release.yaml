@@ -36,7 +36,7 @@ jobs:
       BINARY: "ts-${{ matrix.os }}-${{ matrix.arch }}"
     steps:
       - name: Checkout code
-        uses: actions/checkout@8410ad0602e1e429cee44a835ae9f77f654a6694 # v4.0.0
+        uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.0.0
 
       - name: Setup Golang
         uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32 # v5.0.2

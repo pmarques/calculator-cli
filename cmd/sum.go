@@ -28,7 +28,7 @@ func newSumCmd(rootCmd *cobra.Command) {
 		//nolint:gomnd,mnd
 		Args: cobra.MinimumNArgs(2),
 		Run: func(_ *cobra.Command, args []string) {
-			debug, _ := rootCmd.Root().Flags().GetBool("debug")
+			debug, _ := rootCmd.Flags().GetBool("debug")
 
 			numbers := StringListToIntList(args)
 

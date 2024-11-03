@@ -22,8 +22,11 @@ func sub(numbers []int, debug bool) int {
 
 func newSubCmd() *cobra.Command {
 	subCmd := &cobra.Command{
-		Use:   "sub",
+		//nolint:dupword
+		Use:   "sub number number [...number]",
 		Short: "Subtract all numbers",
+		//nolint:gomnd,mnd
+		Args: cobra.MinimumNArgs(2),
 		Run: func(cmd *cobra.Command, args []string) {
 			debug, _ := cmd.Root().Flags().GetBool("debug")
 

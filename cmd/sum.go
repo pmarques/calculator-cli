@@ -22,10 +22,13 @@ func sum(numbers []int, debug bool) int {
 
 func newSumCmd(rootCmd *cobra.Command) {
 	sumCmd := &cobra.Command{
-		Use:   "sum",
+		//nolint:dupword
+		Use:   "sum number number [...number]",
 		Short: "Sum all numbers",
+		//nolint:gomnd,mnd
+		Args: cobra.MinimumNArgs(2),
 		Run: func(_ *cobra.Command, args []string) {
-			debug, _ := rootCmd.Root().Flags().GetBool("debug")
+			debug, _ := rootCmd.Flags().GetBool("debug")
 
 			numbers := StringListToIntList(args)
 

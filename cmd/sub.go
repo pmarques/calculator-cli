@@ -25,7 +25,7 @@ func newSubCmd() *cobra.Command {
 		//nolint:dupword
 		Use:   "sub number number [...number]",
 		Short: "Subtract all numbers",
-		//nolint:gomnd,mnd
+		//nolint:mnd
 		Args: cobra.MinimumNArgs(2),
 		Run: func(cmd *cobra.Command, args []string) {
 			debug, _ := cmd.Root().Flags().GetBool("debug")

@@ -64,7 +64,7 @@ func FindPlugins() []string {
 	return pluginlist
 }
 
-// Find a binary in plugin homedir directory or user paths.
+// FindPlugin find a binary in plugin homedir directory or user paths.
 func FindPlugin(pluginame string) (string, error) {
 	cmd := cmdPrefix + pluginame
 	paths := strings.Split(os.Getenv("PATH"), ":")

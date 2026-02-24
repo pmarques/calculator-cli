@@ -49,7 +49,7 @@ func FindPlugins() []string {
 				basep := strings.ReplaceAll(file.Name(), cmdPrefix, "")
 				fpath := filepath.Join(path, file.Name())
 
-				info, err := os.Stat(fpath)
+				info, err := os.Stat(fpath) //nolint:gosec
 				if err != nil {
 					continue
 				}

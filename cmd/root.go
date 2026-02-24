@@ -91,12 +91,11 @@ func Execute() {
 
 	args := os.Args[1:]
 
-	if _, _, err := rootCmd.Find(args); err != nil { //nolint:noinlineerr
+	if _, _, err := rootCmd.Find(args); err != nil {
 		exCmd, err := FindPlugin(os.Args[1])
 		// if we can't find command then execute the normal rootCmd command.
 		if err == nil {
 			// if we have found the plugin then sysexec it by replacing current process.
-			//nolint:noinlineerr
 			if err := syscall.Exec(exCmd, append([]string{exCmd}, os.Args[2:]...), os.Environ()); err != nil {
 				fmt.Fprintf(os.Stderr, "Command finished with error: %v", err)
 				os.Exit(int(syscall.ENOENT))
@@ -104,6 +103,6 @@ func Execute() {
 		}
 	}
 
-	///nolint:errcheck
+	//nolint:errcheck
 	rootCmd.Execute()
 }

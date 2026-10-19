@@ -21,7 +21,7 @@ func sub(numbers []int, debug bool) int {
 }
 
 func newSubCmd() *cobra.Command {
-	subCmd := &cobra.Command{
+	subCmd := &cobra.Command{ //nolint:exhaustruct,exhaustruct_v5
 		//nolint:dupword
 		Use:   "sub number number [...number]",
 		Short: "Subtract all numbers",

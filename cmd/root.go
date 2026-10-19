@@ -68,7 +68,7 @@ func Execute() {
 	var Debug bool
 
 	// rootCmd represents the base command when called without any subcommands.
-	rootCmd := &cobra.Command{
+	rootCmd := &cobra.Command{ //nolint:exhaustruct,exhaustruct_v5
 		Use:     "calculator",
 		Short:   "Calculator is a simple CLI calculator as a cobra example",
 		Version: Version,
@@ -91,14 +91,15 @@ func Execute() {
 
 	args := os.Args[1:]
 
-	if _, _, err := rootCmd.Find(args); err != nil { //nolint:noinlineerr
+	_, _, err := rootCmd.Find(args)
+	if err != nil {
 		exCmd, err := FindPlugin(os.Args[1])
 		// if we can't find command then execute the normal rootCmd command.
 		if err == nil {
 			// if we have found the plugin then sysexec it by replacing current process.
-			//nolint:noinlineerr
-			if err := syscall.Exec(exCmd, append([]string{exCmd}, os.Args[2:]...), os.Environ()); err != nil {
-				fmt.Fprintf(os.Stderr, "Command finished with error: %v", err)
+			execErr := syscall.Exec(exCmd, append([]string{exCmd}, os.Args[2:]...), os.Environ())
+			if execErr != nil {
+				fmt.Fprintf(os.Stderr, "Command finished with error: %v", execErr)
 				os.Exit(int(syscall.ENOENT))
 			}
 		}

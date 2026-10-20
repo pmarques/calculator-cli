@@ -68,7 +68,7 @@ func Execute() {
 	var Debug bool
 
 	// rootCmd represents the base command when called without any subcommands.
-	rootCmd := &cobra.Command{
+	rootCmd := &cobra.Command{ //nolint:exhaustruct,exhaustruct_v5
 		Use:     "calculator",
 		Short:   "Calculator is a simple CLI calculator as a cobra example",
 		Version: Version,

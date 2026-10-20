@@ -21,7 +21,7 @@ func sum(numbers []int, debug bool) int {
 }
 
 func newSumCmd(rootCmd *cobra.Command) {
-	sumCmd := &cobra.Command{
+	sumCmd := &cobra.Command{ //nolint:exhaustruct,exhaustruct_v5
 		//nolint:dupword
 		Use:   "sum number number [...number]",
 		Short: "Sum all numbers",
